@@ -1,0 +1,52 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/static/common.css">
+  <link rel="stylesheet" href="/static/index.css">
+  <!-- <link rel="preconnect" href="https://rsms.me/"> -->
+  <!-- <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> -->
+</head>
+
+<body>
+  {% if back_url %}
+  <div class="back">
+    <a href="/{{ back_url }}" class="back-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-arrow-left">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg> {{ back_label }}
+    </a>
+  </div>
+  {% endif %}
+
+  <div class="header">
+    <h1>{{ title }}</h1>
+    <span class="header-right">{{ subtitle }}</span>
+  </div>
+
+  <div class="tile-grid">
+    {% for child in children %}
+    <a class="tile" href="/{{ child.path }}">
+      {% if child.cover %}
+      <div class="cover" style="background-image: url('{{ child.cover }}')"></div>
+      {% else %}
+      <div class="cover" style="background-color: #aaaaff22"></div>
+      {% endif %}
+      <div class="content">
+        <div>
+          <span class="tile-title">{{ child.title }}</span>
+          <span class="tile-right">{{ child.right }}</span>
+        </div>
+        <span class="tile-subtitle">{{ child.subtitle }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+opam-version: "2.0"
+name: "course_manager"
+version: "0.1.0"
+
+synopsis: "TODO"
+description: """
+
+"""
+
+maintainer: "123954477+3fxcf9@users.noreply.github.com"
+authors: [ "3fxcf9" ]
+license: "MIT"
+homepage: "https://github.com/3fxcf9"
+bug-reports: "https://github.com"
+dev-repo: "git+https://github.com"
+
+depends: [
+  "ocaml" {>= "4.14.0"}
+  "dune"  {>= "3.0"}
+  "yaml"
+  "cmdliner"
+]
+
+build: [
+  ["dune" "build" "-j" jobs]
+]

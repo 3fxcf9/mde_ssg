@@ -1,0 +1,10 @@
+(include_subdirs unqualified)
+
+(executable
+ (name course_manager)
+ (public_name course_manager)
+ (libraries mde_parser cmdliner otoml yaml jingoo ubase)
+ (preprocess (pps ppx_blob))
+ (preprocessor_deps (glob_files templates/*.html)))
+
+

@@ -1,0 +1,62 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ subject.name }}</title>
+  <link rel="stylesheet" href="/static/common.css">
+  <link rel="stylesheet" href="/static/subject.css">
+
+  <!-- <link rel="preconnect" href="https://rsms.me/"> -->
+  <!-- <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> -->
+</head>
+
+<body>
+  {% if back_url %}
+  <div class="back">
+    <a href="/{{ back_url }}" class="back-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-arrow-left">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg> {{ back_label }}
+    </a>
+  </div>
+  {% endif %}
+
+  <h1>{{ title }}</h1>
+
+  <div class="search">
+    <input type="text" name="search_query" placeholder="Search…" autofocus>
+  </div>
+
+  <div class="list">
+    {% for child in children %}
+    <a class="list-item" href="/{{ child.path }}"
+      {% if child.description %}
+        data-chapter-description="{{ child.description }}"
+      {% endif %}
+      {% if child.keywords %}
+        data-chapter-keywords="{{ child.keywords | join(' ') }}"
+      {% endif %}>
+
+      {% if child.cover %}
+      <div class="cover" style="background-image: url('{{ child.cover }}')"></div>
+      {% endif %}
+
+      <span class="list-item-title">{{ child.title }}</span>
+
+      {% if child.keywords %}
+      <span class="list-item-keywords">{{ child.keywords | join(" ") }}</span>
+      {% endif %}
+
+      {% if child.date %}
+      <span class="list-item-date">{{ child.date }}</span>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+
+  <script src="/static/subject_search.js"></script>
+</body>
