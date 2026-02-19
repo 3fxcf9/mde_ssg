@@ -14,7 +14,8 @@ let output =
 
 let run_ssg _debug root output =
   ignore @@ Fs.create_dir_if_not_exists output;
-  Ssg.render_path root output ""
+  Ssg.copy_static output;
+  Ssg.render_path root output "" ""
 
 let ssg_t =
   Term.(const run_ssg $ (const Debug.set_enabled $ debug) $ path $ output)

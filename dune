@@ -1,10 +1,20 @@
 (include_subdirs unqualified)
 
+(rule
+ (targets static_assets.ml)
+ (deps (source_tree static))
+ (action
+  (run ocaml-crunch
+       static
+       -o %{targets})))
+
 (executable
  (name course_manager)
  (public_name course_manager)
  (libraries mde_parser cmdliner otoml yaml jingoo ubase)
  (preprocess (pps ppx_blob))
- (preprocessor_deps (glob_files templates/*.html)))
+ (preprocessor_deps
+  (glob_files templates/*.html)
+  (glob_files static/styles/*.css)))
 
 
