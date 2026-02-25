@@ -5,16 +5,18 @@ let read_children_info path =
   Metadata.with_metadata path (fun g ->
       let title = g.string [ "card"; "title" ] in
       let subtitle = g.string_opt [ "card"; "subtitle" ] in
-      let right = g.string_opt [ "card"; "right" ] in
-      (title, subtitle, right))
+      let date = g.string_opt [ "card"; "date" ] in
+      let cover_path = Filename.concat path "cover.svg" in
+      let cover = Fs.read_file cover_path in
+      (title, subtitle, date, cover))
 
 let list_children render_page path output_root output_path :
-    (string * string * string) list =
+    (string * string * string * string) list =
   Fs.list_directory path
   |> List.filter_map (function
        | Fs.Directory dir -> (
            match read_children_info dir with
-           | Ok ((title, _, _) as infos) ->
+           | Ok ((title, _, _, _) as infos) ->
                Debug.log "Detected children %s" dir;
                (* Render children *)
                render_page dir output_root
@@ -27,24 +29,28 @@ let list_children render_page path output_root output_path :
                None)
        | _ -> None)
 
-let render_template path output_path title right children back_label =
+let render_template _path output_root output_path title subtitle children
+    back_label =
   let children =
     Tlist
       (List.map
-         (fun (t, s, r) ->
+         (fun (t, s, r, cover) ->
            let children_path =
              Filename.concat output_path (Sanitization.sanitize_path t)
            in
+           let cover_path = Filename.concat children_path "cover.svg" in
+           print_endline cover_path;
+           if cover <> ""
+           then
+             ignore
+             @@ Fs.write_file (Filename.concat output_root cover_path) cover;
            Tobj
              [
                ("title", Tstr t);
                ("subtitle", Tstr s);
-               ("right", Tstr r);
+               ("date", Tstr r);
                ("path", Tstr children_path);
-               (* TODO *)
-               ( "cover",
-                 Tstr (if false then Filename.concat path "cover.svg" else "")
-               );
+               ("cover", Tstr (if cover <> "" then cover_path else ""));
              ])
          children)
   in
@@ -55,7 +61,7 @@ let render_template path output_path title right children back_label =
       ( "back_url",
         Tstr (if output_path = "" then "" else Filename.dirname output_path) );
       ("back_label", Tstr back_label);
-      ("right", Tstr right);
+      ("subtitle", Tstr subtitle);
       ("children", children);
     ]
   in
@@ -69,15 +75,20 @@ let read_page_info path =
     (fun toml ->
       let open Toml_utils in
       let title = find_string toml [ "page"; "title" ] in
-      let right = find_string toml [ "page"; "right" ] in
-      (title, right))
+      let subtitle = find_string_optional toml [ "page"; "subtitle" ] in
+      (title, subtitle))
     path
 
 let generate_tiled_page render_page path output_root output_path back_label =
   match read_page_info path with
-  | Ok (title, right) ->
-      let children = list_children render_page path output_root output_path in
-      render_template path output_path title right children back_label
+  | Ok (title, date) ->
+      let children =
+        list_children render_page path output_root output_path
+        |> List.sort (fun (_, _, a, _) (_, _, b, _) -> Date.compare_dates b a)
+        (* Recent first *)
+      in
+      render_template path output_root output_path title date children
+        back_label
   | Error (code, message) ->
       Debug.log "Invalid tiled page: %s. Exiting." path;
       prerr_endline message;

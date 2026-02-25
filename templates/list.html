@@ -38,11 +38,11 @@
         data-chapter-description="{{ child.description }}"
       {% endif %}
       {% if child.keywords %}
-        data-chapter-keywords="{{ child.keywords | join(' ') }}"
+        data-chapter-keywords="{{ child.keywords | join(" ") }}"
       {% endif %}>
 
       {% if child.cover %}
-      <div class="cover" style="background-image: url('{{ child.cover }}')"></div>
+      <div class="cover" style="background-image: url('/{{ child.cover }}')"></div>
       {% endif %}
 
       <span class="list-item-title">{{ child.title }}</span>

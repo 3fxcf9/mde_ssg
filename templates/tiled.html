@@ -34,14 +34,14 @@
     {% for child in children %}
     <a class="tile" href="/{{ child.path }}">
       {% if child.cover %}
-      <div class="cover" style="background-image: url('{{ child.cover }}')"></div>
+      <div class="cover" style="background-image: url('/{{ child.cover }}')"></div>
       {% else %}
       <div class="cover" style="background-color: #aaaaff22"></div>
       {% endif %}
       <div class="content">
         <div>
           <span class="tile-title">{{ child.title }}</span>
-          <span class="tile-right">{{ child.right }}</span>
+          <span class="tile-right">{{ child.date }}</span>
         </div>
         <span class="tile-subtitle">{{ child.subtitle }}</span>
       </div>

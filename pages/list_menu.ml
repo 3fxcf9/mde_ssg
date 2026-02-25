@@ -7,15 +7,17 @@ let read_children_info path =
       let date = g.string_opt [ "card"; "date" ] in
       let description = g.string_opt [ "card"; "description" ] in
       let keywords = g.string_opt [ "card"; "keywords" ] in
-      (title, date, description, keywords))
+      let cover_path = Filename.concat path "cover.svg" in
+      let cover = Fs.read_file cover_path in
+      (title, date, description, keywords, cover))
 
 let list_children render_page path output_root output_path :
-    (string * string * string * string) list =
+    (string * string * string * string * string) list =
   Fs.list_directory path
   |> List.filter_map (function
        | Fs.Directory dir -> (
            match read_children_info dir with
-           | Ok ((title, _, _, _) as infos) ->
+           | Ok ((title, _, _, _, _) as infos) ->
                Debug.log "Detected children %s" dir;
                (* Render children *)
                render_page dir output_root
@@ -28,14 +30,20 @@ let list_children render_page path output_root output_path :
                None)
        | _ -> None)
 
-let render_template path output_path title back_label children =
+let render_template _path output_root output_path title back_label children =
   let children =
     Tlist
       (List.map
-         (fun (t, d, des, k) ->
+         (fun (t, d, des, k, cover) ->
            let children_path =
              Filename.concat output_path (Sanitization.sanitize_path t)
            in
+           let cover_path = Filename.concat children_path "cover.svg" in
+           print_endline cover_path;
+           if cover <> ""
+           then
+             ignore
+             @@ Fs.write_file (Filename.concat output_root cover_path) cover;
            Tobj
              [
                ("title", Tstr t);
@@ -43,10 +51,7 @@ let render_template path output_path title back_label children =
                ("description", Tstr des);
                ("keywords", Tstr k);
                ("path", Tstr children_path);
-               (* TODO *)
-               ( "cover",
-                 Tstr (if false then Filename.concat path "cover.svg" else "")
-               );
+               ("cover", Tstr (if cover <> "" then cover_path else ""));
              ])
          children)
   in
@@ -76,10 +81,11 @@ let generate_list_page render_page path output_root output_path back_label =
   | Ok title ->
       let children =
         list_children render_page path output_root output_path
-        |> List.sort (fun (_, a, _, _) (_, b, _, _) -> Date.compare_dates b a)
+        |> List.sort (fun (_, a, _, _, _) (_, b, _, _, _) ->
+               Date.compare_dates b a)
         (* Recent first *)
       in
-      render_template path output_path title back_label children
+      render_template path output_root output_path title back_label children
   | Error (code, message) ->
       Debug.log "Invalid list page: %s. Exiting." path;
       prerr_endline message;

@@ -24,12 +24,6 @@ let write_file path content =
     Debug.log "Error writing file: %s" (Printexc.to_string e);
     Error (Printf.sprintf "Failed to write file %s" path)
 
-(* let create_dir_if_not_exists path = *)
-(*   try *)
-(*     if not (Sys.file_exists path) then Sys.mkdir path 0o755; *)
-(*     Ok () *)
-(*   with Sys_error e -> Error (Printf.sprintf "Error reading file %s" e) *)
-
 let rec create_dir_if_not_exists path =
   try
     if not (Sys.file_exists path)
