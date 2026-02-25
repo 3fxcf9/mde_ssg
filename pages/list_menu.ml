@@ -74,7 +74,11 @@ let read_page_info path =
 let generate_list_page render_page path output_root output_path back_label =
   match read_page_info path with
   | Ok title ->
-      let children = list_children render_page path output_root output_path in
+      let children =
+        list_children render_page path output_root output_path
+        |> List.sort (fun (_, a, _, _) (_, b, _, _) -> Date.compare_dates b a)
+        (* Recent first *)
+      in
       render_template path output_path title back_label children
   | Error (code, message) ->
       Debug.log "Invalid list page: %s. Exiting." path;
