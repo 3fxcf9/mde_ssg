@@ -1,16 +1,7 @@
 let copy_static root =
-  let mkdir path =
-    ignore @@ Fs.create_dir_if_not_exists (Filename.concat root path)
-  in
-  let write_file path content =
-    ignore @@ Fs.write_file (Filename.concat root path) content
-  in
-  mkdir "";
-  mkdir "styles";
-
-  write_file "styles/common.css" [%blob "static/styles/common.css"];
-
-  Debug.log "Assets successfully extracted"
+  ignore @@ Fs.create_dir_if_not_exists root;
+  Static.unpack_assets root;
+  Debug.log ~cat:Assets "Assets successfully extracted"
 
 let rec render_path source_path output_root output_path caller_name =
   match Fs.find_mde source_path with

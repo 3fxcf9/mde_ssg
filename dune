@@ -5,6 +5,7 @@
  (deps (source_tree static))
  (action
   (run ocaml-crunch
+       --mode plain
        static
        -o %{targets})))
 
