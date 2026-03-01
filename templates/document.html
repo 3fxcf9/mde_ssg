@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/styles/common.css" />
   <link rel="stylesheet" href="/styles/document.css" />
   <link rel="stylesheet" href="/styles/table_of_contents.css" />
-  <!-- <link rel="stylesheet" href="/static/figure_zoom.css" /> -->
+  <link rel="stylesheet" href="/styles/figure_zoom.css" />
 
   <link rel="stylesheet" href="/katex/katex.min.css"/>
   <link href="/fonts/computer-modern/fonts/serif.css" rel="stylesheet">
@@ -45,20 +45,7 @@
 
   <script src="/js/table_of_contents.js"></script>
 
-  <script>
-    window.addEventListener("load", renderMath);
-  //   window.addEventListener("load", initFigureZoom);
-  //   window.addEventListener("load", initTOC);
-  //   window.addEventListener("load", () => {
-  //     const new_files = document.querySelectorAll(".new-file")
-  //     new_files.forEach(hr => {
-  //       const btn_container = document.createElement("div")
-  //       btn_container.classList.add("new-file-btn-container")
-  //       btn_container.innerHTML = '<a href="/live?path=' + hr.dataset.filepath + '" class="preview-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>Live preview</a>'
-  //       hr.insertAdjacentElement("afterend", btn_container);
-  //     })
-  //   })
-  </script>
+  <script src="/js/figure_zoom.js"></script>
 
   <script>
     window.addEventListener("beforeprint", (event) => {

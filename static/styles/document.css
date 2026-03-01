@@ -905,7 +905,8 @@ figure {
   counter-increment: figure-counter;
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 1rem;
+  align-items: center;
   font-size: smaller;
   font-style: italic;
 }

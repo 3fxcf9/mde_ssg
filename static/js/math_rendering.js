@@ -226,3 +226,6 @@ function renderMath() {
     });
   });
 }
+
+
+window.addEventListener("load", renderMath);

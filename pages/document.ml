@@ -16,9 +16,35 @@ let render_template output_path title back_label toc_html html =
   let list_template = [%blob "templates/document.html"] in
   Jg_template.from_string list_template ~models
 
+(** [generate_figure_hashtable dir_path] reads a directory and returns a Hashtbl
+    where keys are the filenames and values are the file contents. **)
+let generate_figure_hashtable dir_path =
+  let svg_table = Hashtbl.create 8 in
+
+  let entries = Fs.list_directory dir_path in
+
+  List.iter
+    (function
+      | Fs.File path ->
+          if Filename.check_suffix path ".svg"
+          then begin
+            Debug.log ~cat:Figures "Detected figure at %s" path;
+            let filename = Filename.basename path in
+            let content = Fs.read_file path in
+            Hashtbl.add svg_table filename content
+          end
+      | Fs.Directory _ -> ())
+    entries;
+
+  svg_table
+
 let generate_document_page mde_path output_path back_label =
-  let content = In_channel.with_open_bin mde_path In_channel.input_all in
-  let html, toc_html, meta = Mde_parser.parse_mde content in
+  let content = Fs.read_file mde_path in
+  let svg_table =
+    generate_figure_hashtable
+      (Filename.concat (Filename.dirname mde_path) "figures")
+  in
+  let html, toc_html, meta = Mde_parser.parse_mde ~figures:svg_table content in
   let title =
     match meta with
     | Some m ->

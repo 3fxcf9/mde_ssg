@@ -39,7 +39,6 @@ let render_template _path output_root output_path title back_label children =
              Filename.concat output_path (Sanitization.sanitize_path t)
            in
            let cover_path = Filename.concat children_path "cover.svg" in
-           print_endline cover_path;
            if cover <> ""
            then
              ignore
