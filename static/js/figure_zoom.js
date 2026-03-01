@@ -1,9 +1,8 @@
 function initFigureZoom() {
   const figures = document.querySelectorAll("figure");
 
-  figures.forEach((f) =>
+  figures.forEach((f) =>{
     f.addEventListener("click", () => {
-      const figureName = f.querySelector("figcaption").innerHTML;
       const figureImage = Array.from(f.querySelectorAll("svg")).concat(
         Array.from(f.querySelectorAll("img")),
       )[0];
@@ -30,11 +29,15 @@ function initFigureZoom() {
 
       zoom_window.appendChild(image_view_element);
 
-      // Legend
-      const legend_element = document.createElement("span");
-      legend_element.classList.add("zoom_legend");
-      legend_element.innerHTML = figureName;
-      zoom_window.appendChild(legend_element);
+      // Legend (if found)
+      if (f.querySelector("figcaption")) {
+      const figureName = f.querySelector("figcaption").innerHTML;
+      console.log("yes");
+        const legend_element = document.createElement("span");
+        legend_element.classList.add("zoom_legend");
+        legend_element.innerHTML = figureName;
+        zoom_window.appendChild(legend_element);
+      }
 
       window_background.appendChild(zoom_window);
 
@@ -45,8 +48,8 @@ function initFigureZoom() {
       });
 
       document.body.appendChild(window_background);
-    }),
-  );
+    })
+  });
 }
 
 window.addEventListener("load", initFigureZoom);
