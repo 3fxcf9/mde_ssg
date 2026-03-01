@@ -1,3 +1,7 @@
+/****************************************/
+/*               Layout                 */
+/****************************************/
+
 @page {
   size: A4;
   margin: 20mm;
@@ -22,10 +26,6 @@ html {
   }
 }
 
-p,
-.environment {
-  font-size: 1rem;
-}
 
 @media print {
 
@@ -35,10 +35,93 @@ p,
     height: 257mm;
   }
 
+}
+
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-family: "Computer Modern Serif";
+}
+
+/* @media screen and (max-width: 1000px) { */
+/*   body { */
+/*     padding: 3rem 1.5rem; */
+/*   } */
+/* } */
+/**/
+/* @media screen and (max-width: 700px) { */
+/*   body { */
+/*     padding: 2rem 1rem; */
+/*   } */
+/* } */
+
+.left {
+  width: min(25vw, 400px);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid var(--subtext-color);
+  padding: 2rem;
+}
+
+.right {
+  flex: 1;
+  padding: 10vh 10vw;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 1800px) {
+  .right {
+    padding: 10vh 15vw;
+  }
+}
+
+/****************************************/
+/*               Elements               */
+/****************************************/
+
+/* Font size */
+p,
+.environment {
+  font-size: 1rem;
+}
+
+@media print {
   body {
     font-size: 3.8mm;
   }
 }
+
+p {
+  line-height: 200%;
+  margin: 1rem 0;
+}
+
+@media print {
+  p {
+    line-height: 150%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  p {
+    text-align: justify;
+  }
+}
+
+.anchor {
+  scroll-margin-top: 20vh;
+}
+
+
+/*************** Headings ***************/
 
 h1,
 h2,
@@ -68,52 +151,6 @@ h6 {
 
 a {
   color: var(--links-color);
-}
-
-body {
-  padding: 10vh 20vw;
-  color: var(--text-color);
-  background-color: var(--bg-color);
-  font-family: "Computer Modern Serif";
-}
-
-@media screen and (max-width: 1000px) {
-  body {
-    padding: 3rem 1.5rem;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  body {
-    padding: 2rem 1rem;
-  }
-}
-
-@media print {
-  body {
-    padding: 0 !important;
-  }
-}
-
-p {
-  line-height: 200%;
-  margin: 1rem 0;
-}
-
-@media print {
-  p {
-    line-height: 150%;
-  }
-}
-
-@media screen and (min-width: 1000px) {
-  p {
-    text-align: justify;
-  }
-}
-
-.anchor {
-  scroll-margin-top: 20vh;
 }
 
 /*************** Blockquote ***************/
@@ -674,7 +711,7 @@ body {
   content: "EXO " counter(exercise-counter);
 }
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1800px) {
 
   .environment-proof::before,
   .environment-remark::before,

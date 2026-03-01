@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="/styles/common.css" />
   <link rel="stylesheet" href="/styles/document.css" />
-  <!-- <link rel="stylesheet" href="/static/table_of_contents.css" /> -->
+  <link rel="stylesheet" href="/styles/table_of_contents.css" />
   <!-- <link rel="stylesheet" href="/static/figure_zoom.css" /> -->
 
   <link rel="stylesheet" href="/katex/katex.min.css"/>
@@ -19,20 +19,26 @@
 </head>
 
 <body>
-  {% if back_url %}
-  <div class="back">
-    <a href="/{{ back_url }}" class="back-button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="feather feather-arrow-left">
-        <line x1="19" y1="12" x2="5" y2="12"></line>
-        <polyline points="12 19 5 12 12 5"></polyline>
-      </svg> {{ back_label }}
-    </a>
-  </div>
-  {% endif %}
+  <aside class="left">
+    {% if back_url %}
+    <div class="back">
+      <a href="/{{ back_url }}" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="feather feather-arrow-left">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg> {{ back_label }}
+      </a>
+    </div>
+    {% endif %}
 
-  <div id="app">{{ html | safe }}</div>
+    <nav class="toc-wrapper">
+      {{ toc_html | safe }}
+    </nav>
+  </aside>
+
+  <main class="right">{{ html | safe }}</main>
 
   <script defer src="/katex/katex.min.js"></script>
   <script src="/js/math_rendering.js"></script>

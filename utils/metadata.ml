@@ -53,7 +53,9 @@ let with_metadata path f =
 
   let metadata =
     match mde_path_opt with
-    | Some p -> (Mde_parser.parse_mde (Fs.read_file p) |> snd, p)
+    | Some p ->
+        let _, _, meta = Mde_parser.parse_mde (Fs.read_file p) in
+        (meta, p)
     | None -> (None, "")
   in
 
