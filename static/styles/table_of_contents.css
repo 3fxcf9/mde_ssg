@@ -57,3 +57,15 @@
     font-weight: bold;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .toc a {
+    margin: 0;
+    padding: 1rem;
+    display: inline-block;
+
+    &.active {
+      text-decoration: underline;
+    }
+  }
+}

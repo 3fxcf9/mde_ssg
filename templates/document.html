@@ -19,6 +19,12 @@
 </head>
 
 <body>
+  <div class="menu-toggle">
+    <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+
+    <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </div>
+
   <aside class="left">
     {% if back_url %}
     <div class="back">
@@ -46,6 +52,24 @@
   <script src="/js/table_of_contents.js"></script>
 
   <script src="/js/figure_zoom.js"></script>
+
+  <script>
+    const menuElement = document.querySelector(".left");
+    const menuToggleElement = document.querySelector(".menu-toggle");
+
+    function toggleMenuVisibility(force) {
+        const shouldOpen = typeof force === "boolean" ? force : !menuElement.classList.contains("opened");
+
+        menuElement.classList.toggle("opened", shouldOpen);
+        menuToggleElement.classList.toggle("opened", shouldOpen);
+    }
+
+    menuToggleElement.addEventListener("click", toggleMenuVisibility);
+
+    document.querySelectorAll("nav a").forEach(link => {
+        link.addEventListener("click", () => toggleMenuVisibility(false));
+    });
+  </script>
 
   <script>
     window.addEventListener("beforeprint", (event) => {

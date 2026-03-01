@@ -71,6 +71,10 @@ figure {
   width: 100%;
 }
 
+.zoom_image_view svg {
+  filter: invert();
+}
+
 .zoom_legend {
   text-align: center;
 }
