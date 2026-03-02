@@ -11,8 +11,8 @@ let read_children_info path =
       let cover = Fs.read_file cover_path in
       (title, date, description, keywords, cover))
 
-let list_children render_page path output_root http_root output_path :
-    (string * string * string * string * string) list =
+let list_children render_page path output_root http_root output_path prev_title
+    : (string * string * string * string * string) list =
   Fs.list_directory path
   |> List.filter_map (function
        | Fs.Directory dir -> (
@@ -23,7 +23,7 @@ let list_children render_page path output_root http_root output_path :
                render_page dir output_root http_root
                  (Sanitization.sanitize_path
                  @@ Filename.concat output_path title)
-                 title;
+                 prev_title;
                Some infos
            | Error (_, message) ->
                Debug.log "Ignoring folder %s. %s" dir message;
@@ -82,7 +82,7 @@ let generate_list_page render_page path output_root http_root output_path
   match read_page_info path with
   | Ok title ->
       let children =
-        list_children render_page path output_root http_root output_path
+        list_children render_page path output_root http_root output_path title
         |> List.sort (fun (_, a, _, _, _) (_, b, _, _, _) ->
                Date.compare_dates b a)
         (* Recent first *)

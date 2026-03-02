@@ -877,14 +877,14 @@ summary {
 }
 
 /* Wide viewport */
-@media (min-width: 1400px) {
+@media (min-width: 1800px) {
   .sidenote {
     float: right;
     clear: right;
     text-align: left;
 
-    width: 19vw;
-    margin-right: -19vw;
+    width: 14vw;
+    margin-right: -14vw;
     top: -0.5rem;
     padding-left: 1vw;
     margin-top: 1rem;
@@ -892,7 +892,7 @@ summary {
 }
 
 /* Narrow viewport */
-@media (max-width: 1400px) {
+@media (max-width: 1800px) {
   .sidenote {
     float: left;
     text-align: left;
@@ -930,7 +930,7 @@ body {
   margin-left: 0.1rem;
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1800px) {
   /* Highlight the sidenote when mouse hovers on the sidenote number in body. */
   .sidenote-number:hover .sidenote {
     background-color: var(--code-bg-color);
