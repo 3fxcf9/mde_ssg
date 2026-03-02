@@ -19,6 +19,11 @@ depends: [
   "dune"  {>= "3.0"}
   "yaml"
   "cmdliner"
+  "otoml"
+  "jingoo"
+  "ubase"
+  "ppx_blob"
+  "crunch"
 ]
 
 build: [
