@@ -39,12 +39,9 @@ let generate_figure_hashtable dir_path =
 
   svg_table
 
-let generate_document_page mde_path http_root output_path back_label =
-  let content = Fs.read_file mde_path in
-  let svg_table =
-    generate_figure_hashtable
-      (Filename.concat (Filename.dirname mde_path) "figures")
-  in
+let generate_document_page dir http_root output_path back_label =
+  let content = Fs.read_mde dir in
+  let svg_table = generate_figure_hashtable (Filename.concat dir "figures") in
   let html, toc_html, meta = Mde_parser.parse_mde ~figures:svg_table content in
   let title =
     match meta with

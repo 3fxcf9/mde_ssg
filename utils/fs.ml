@@ -36,10 +36,19 @@ let rec create_dir_if_not_exists path =
 
 let find_mde dir_path =
   try
-    Sys.readdir dir_path
+    let files = Sys.readdir dir_path in
+    Array.sort compare files;
+    files
     |> Array.find_opt (fun file -> Filename.check_suffix file ".mde")
     |> Option.map (fun file -> Filename.concat dir_path file)
   with Sys_error _ -> None
 
 let read_file path =
   try In_channel.with_open_bin path In_channel.input_all with _ -> ""
+
+let read_mde dir_path =
+  Sys.readdir dir_path |> Array.to_list
+  |> List.filter (fun file -> Filename.check_suffix file ".mde")
+  |> List.sort compare
+  |> List.map (fun file -> read_file (Filename.concat dir_path file))
+  |> String.concat "\n\n"

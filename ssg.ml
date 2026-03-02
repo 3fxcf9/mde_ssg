@@ -6,7 +6,7 @@ let copy_static root =
 let rec render_path source_path output_root http_root output_path caller_name :
     unit =
   match Fs.find_mde source_path with
-  | Some mde_path ->
+  | Some _ ->
       Debug.log "Mde file detected at %s" source_path;
       let output_full_path = Filename.concat output_root output_path in
       if not (Sys.file_exists output_full_path)
@@ -14,7 +14,7 @@ let rec render_path source_path output_root http_root output_path caller_name :
       ignore
       @@ Fs.write_file
            (Filename.concat output_full_path "index.html")
-           (Document.generate_document_page mde_path http_root output_path
+           (Document.generate_document_page source_path http_root output_path
               caller_name)
   | None -> begin
       match
