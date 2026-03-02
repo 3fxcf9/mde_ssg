@@ -5,16 +5,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/styles/common.css">
-  <link rel="stylesheet" href="/styles/tiled.css">
+  <link rel="stylesheet" href="{{ http_root }}styles/common.css">
+  <link rel="stylesheet" href="{{ http_root }}styles/tiled.css">
 
-  <link rel="preload" href="/fonts/inter/InterVariable.ttf" as="font" type="font/ttf">
+  <link rel="preload" href="{{ http_root }}fonts/inter/InterVariable.ttf" as="font" type="font/ttf">
 </head>
 
 <body>
   {% if back_url %}
   <div class="back">
-    <a href="/{{ back_url }}" class="back-button">
+    <a href="{{ http_root }}{{ back_url }}" class="back-button">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         class="feather feather-arrow-left">
@@ -32,9 +32,9 @@
 
   <div class="tile-grid">
     {% for child in children %}
-    <a class="tile" href="/{{ child.path }}">
+    <a class="tile" href="{{ http_root }}{{ child.path }}">
       {% if child.cover %}
-      <div class="cover" style="background-image: url('/{{ child.cover }}')"></div>
+      <div class="cover" style="background-image: url('{{ http_root }}{{ child.cover }}')"></div>
       {% else %}
       <div class="cover" style="background-color: #aaaaff22"></div>
       {% endif %}

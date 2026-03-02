@@ -12,13 +12,28 @@ let output =
   let doc = "The directory to output to." in
   Arg.(value & pos 1 dir "output" & info [] ~docv:"OUTPUT" ~doc)
 
-let run_ssg _debug root output =
+let http_root =
+  let doc = "The base URL path for the generated site." in
+  Arg.(value & opt string "/" & info [ "http-root" ] ~docv:"ROOT" ~doc)
+
+let run_ssg _debug root output http_root : unit =
   ignore @@ Fs.create_dir_if_not_exists output;
   Ssg.copy_static output;
-  Ssg.render_path root output "" ""
+  let ensure_slash_end path =
+    if String.ends_with ~suffix:"/" path then path else path ^ "/"
+  in
+  let ensure_shash_beg path =
+    if String.starts_with ~prefix:"/" path then path else "/" ^ path
+  in
+  let http_root = ensure_slash_end @@ ensure_shash_beg http_root in
+  Debug.log "Using HTTP_ROOT=%s" http_root;
+  Ssg.render_path root output http_root "" ""
 
 let ssg_t =
-  Term.(const run_ssg $ (const Debug.set_enabled $ debug) $ path $ output)
+  Term.(
+    const run_ssg
+    $ (const Debug.set_enabled $ debug)
+    $ path $ output $ http_root)
 
 let ssg_cmd =
   let info = Cmd.info "ssg" ~doc:"Run the static site generator" in

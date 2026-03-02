@@ -11,7 +11,7 @@ let read_children_info path =
       let cover = Fs.read_file cover_path in
       (title, date, description, keywords, cover))
 
-let list_children render_page path output_root output_path :
+let list_children render_page path output_root http_root output_path :
     (string * string * string * string * string) list =
   Fs.list_directory path
   |> List.filter_map (function
@@ -20,7 +20,7 @@ let list_children render_page path output_root output_path :
            | Ok ((title, _, _, _, _) as infos) ->
                Debug.log "Detected children %s" dir;
                (* Render children *)
-               render_page dir output_root
+               render_page dir output_root http_root
                  (Sanitization.sanitize_path
                  @@ Filename.concat output_path title)
                  title;
@@ -30,7 +30,8 @@ let list_children render_page path output_root output_path :
                None)
        | _ -> None)
 
-let render_template _path output_root output_path title back_label children =
+let render_template _path output_root http_root output_path title back_label
+    children =
   let children =
     Tlist
       (List.map
@@ -62,6 +63,7 @@ let render_template _path output_root output_path title back_label children =
         Tstr (if output_path = "" then "" else Filename.dirname output_path) );
       ("back_label", Tstr back_label);
       ("children", children);
+      ("http_root", Tstr http_root);
     ]
   in
 
@@ -75,16 +77,18 @@ let read_page_info path =
       find_string toml [ "page"; "title" ])
     path
 
-let generate_list_page render_page path output_root output_path back_label =
+let generate_list_page render_page path output_root http_root output_path
+    back_label =
   match read_page_info path with
   | Ok title ->
       let children =
-        list_children render_page path output_root output_path
+        list_children render_page path output_root http_root output_path
         |> List.sort (fun (_, a, _, _, _) (_, b, _, _, _) ->
                Date.compare_dates b a)
         (* Recent first *)
       in
-      render_template path output_root output_path title back_label children
+      render_template path output_root http_root output_path title back_label
+        children
   | Error (code, message) ->
       Debug.log "Invalid list page: %s. Exiting." path;
       prerr_endline message;

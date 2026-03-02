@@ -7,15 +7,15 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/styles/common.css" />
-  <link rel="stylesheet" href="/styles/document.css" />
-  <link rel="stylesheet" href="/styles/table_of_contents.css" />
-  <link rel="stylesheet" href="/styles/figure_zoom.css" />
+  <link rel="stylesheet" href="{{ http_root }}styles/common.css" />
+  <link rel="stylesheet" href="{{ http_root }}styles/document.css" />
+  <link rel="stylesheet" href="{{ http_root }}styles/table_of_contents.css" />
+  <link rel="stylesheet" href="{{ http_root }}styles/figure_zoom.css" />
 
-  <link rel="stylesheet" href="/katex/katex.min.css"/>
-  <link href="/fonts/computer-modern/fonts/serif.css" rel="stylesheet">
-  <link href="/fonts/computer-modern/fonts/sans.css" rel="stylesheet">
-  <link rel="preload" href="/fonts/inter/InterVariable.ttf" as="font" type="font/ttf">
+  <link rel="stylesheet" href="{{ http_root }}katex/katex.min.css"/>
+  <link href="{{ http_root }}fonts/computer-modern/fonts/serif.css" rel="stylesheet">
+  <link href="{{ http_root }}fonts/computer-modern/fonts/sans.css" rel="stylesheet">
+  <link rel="preload" href="{{ http_root }}fonts/inter/InterVariable.ttf" as="font" type="font/ttf">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
   <aside class="left">
     {% if back_url %}
     <div class="back">
-      <a href="/{{ back_url }}" class="back-button">
+      <a href="{{ http_root }}{{ back_url }}" class="back-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
           class="feather feather-arrow-left">
@@ -46,12 +46,12 @@
 
   <main class="right">{{ html | safe }}</main>
 
-  <script defer src="/katex/katex.min.js"></script>
-  <script src="/js/math_rendering.js"></script>
+  <script defer src="{{ http_root }}katex/katex.min.js"></script>
+  <script src="{{ http_root }}js/math_rendering.js"></script>
 
-  <script src="/js/table_of_contents.js"></script>
+  <script src="{{ http_root }}js/table_of_contents.js"></script>
 
-  <script src="/js/figure_zoom.js"></script>
+  <script src="{{ http_root }}js/figure_zoom.js"></script>
 
   <script>
     const menuElement = document.querySelector(".left");

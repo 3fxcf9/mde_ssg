@@ -10,7 +10,7 @@ let read_children_info path =
       let cover = Fs.read_file cover_path in
       (title, subtitle, date, cover))
 
-let list_children render_page path output_root output_path :
+let list_children render_page path output_root http_root output_path :
     (string * string * string * string) list =
   Fs.list_directory path
   |> List.filter_map (function
@@ -19,7 +19,7 @@ let list_children render_page path output_root output_path :
            | Ok ((title, _, _, _) as infos) ->
                Debug.log "Detected children %s" dir;
                (* Render children *)
-               render_page dir output_root
+               render_page dir output_root http_root
                  (Sanitization.sanitize_path
                  @@ Filename.concat output_path title)
                  title;
@@ -29,8 +29,8 @@ let list_children render_page path output_root output_path :
                None)
        | _ -> None)
 
-let render_template _path output_root output_path title subtitle children
-    back_label =
+let render_template _path output_root http_root output_path title subtitle
+    children back_label =
   let children =
     Tlist
       (List.map
@@ -62,6 +62,7 @@ let render_template _path output_root output_path title subtitle children
       ("back_label", Tstr back_label);
       ("subtitle", Tstr subtitle);
       ("children", children);
+      ("http_root", Tstr http_root);
     ]
   in
 
@@ -78,15 +79,16 @@ let read_page_info path =
       (title, subtitle))
     path
 
-let generate_tiled_page render_page path output_root output_path back_label =
+let generate_tiled_page render_page path output_root http_root output_path
+    back_label =
   match read_page_info path with
   | Ok (title, date) ->
       let children =
-        list_children render_page path output_root output_path
+        list_children render_page path output_root http_root output_path
         |> List.sort (fun (_, _, a, _) (_, _, b, _) -> Date.compare_dates b a)
         (* Recent first *)
       in
-      render_template path output_root output_path title date children
+      render_template path output_root http_root output_path title date children
         back_label
   | Error (code, message) ->
       Debug.log "Invalid tiled page: %s. Exiting." path;

@@ -1,7 +1,7 @@
 open Jingoo
 open Jg_types
 
-let render_template output_path title back_label toc_html html =
+let render_template output_path http_root title back_label toc_html html =
   let models =
     [
       ("title", Tstr title);
@@ -10,6 +10,7 @@ let render_template output_path title back_label toc_html html =
       ("back_label", Tstr back_label);
       ("toc_html", Tstr toc_html);
       ("html", Tstr html);
+      ("http_root", Tstr http_root);
     ]
   in
 
@@ -38,7 +39,7 @@ let generate_figure_hashtable dir_path =
 
   svg_table
 
-let generate_document_page mde_path output_path back_label =
+let generate_document_page mde_path http_root output_path back_label =
   let content = Fs.read_file mde_path in
   let svg_table =
     generate_figure_hashtable
@@ -51,4 +52,4 @@ let generate_document_page mde_path output_path back_label =
         Metadata.get_yaml_string (Metadata.find_yaml m [ "card"; "title" ])
     | None -> ""
   in
-  render_template output_path title back_label toc_html html
+  render_template output_path http_root title back_label toc_html html
