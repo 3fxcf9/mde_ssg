@@ -570,7 +570,7 @@ ol > li {
   prefix: "(";
 }
 
-.compact-list {
+.list-compact {
   display: flex;
   gap: 0.2em max(10vw, 2em);
   justify-content: center;
@@ -582,11 +582,11 @@ ol > li {
   }
 }
 
-ol.compact-list {
+ol.list-compact {
   list-style-type: compact-roman;
 }
 
-p:has(+ .compact-list) {
+p:has(+ .list-compact) {
   margin-bottom: 0;
 }
 
