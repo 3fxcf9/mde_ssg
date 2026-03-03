@@ -1,3 +1,8 @@
 - group shared functions in renderers
 - clean structure
-- HANDLE MULTIPLE MDE FILES
+- environments
+  - recall
+  - dimmed
+- tables
+- allow pdf files, images, code…
+- conceal level for mde (only thm, def, cor, lemma…)

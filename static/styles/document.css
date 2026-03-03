@@ -615,6 +615,9 @@ ul.list-plus li {
 .off-program {
   color: #ffa3a3;
 }
+.dimmed {
+  color: var(--subtext-color);
+}
 
 .environment {
   margin: 1rem 0;
@@ -643,6 +646,7 @@ ul.list-plus li {
 .environment-lemma,
 .environment-property,
 .environment-definition,
+.environment-definition-proposition,
 .environment-method,
 .environment-proof,
 .environment-example {
@@ -658,6 +662,7 @@ ul.list-plus li {
   .environment-lemma,
   .environment-property,
   .environment-definition,
+  .environment-definition-proposition,
   .environment-method,
   .environment-proof,
   .environment-example {
@@ -671,7 +676,8 @@ ul.list-plus li {
   border-width: 5px;
 }
 
-.environment-definition {
+.environment-definition,
+.environment-definition-proposition {
   border-style: dashed;
 }
 
@@ -704,13 +710,35 @@ ul.list-plus li {
   }
 }
 
-/* Environment title */
+/***** Environment title */
+
+/* Compact environments */
+.environment-proof > .environment-title,
+.environment-remark > .environment-title,
+.environment-example > .environment-title,
+.environment-exercise > .environment-title,
+.environment-recall > .environment-title {
+  font-style: italic;
+  display: inline-block;
+  &::before {
+    content: "(";
+  }
+  &::after {
+    content: ")";
+  }
+  &.environment-title {
+    margin-left: 1ex;
+  }
+}
+
+/* Important environments */
 .environment-theorem > .environment-title,
 .environment-proposition > .environment-title,
 .environment-corollary > .environment-title,
 .environment-lemma > .environment-title,
 .environment-property > .environment-title,
 .environment-definition > .environment-title,
+.environment-definition-proposition > .environment-title,
 .environment-notation > .environment-title,
 .environment-method > .environment-title {
   font-size: 0.9rem;
@@ -729,7 +757,8 @@ ul.list-plus li {
   .environment-corollary > .environment-title,
   .environment-lemma > .environment-title,
   .environment-property > .environment-title,
-  .environment-definition > .environment-title {
+  .environment-definition > .environment-title,
+  .environment-definition-proposition > .environment-title {
     font-size: 0.7rem;
   }
 }
@@ -743,6 +772,7 @@ ul.list-plus li {
 .environment-proof::before,
 .environment-remark::before,
 .environment-example::before,
+.environment-recall::before,
 .environment-exercise::before {
   font-size: 20px;
   font-family: "Inter Variable";
@@ -776,10 +806,15 @@ body {
   content: "EXO " counter(exercise-counter);
 }
 
+.environment-recall::before {
+  content: "RAPPEL";
+}
+
 @media screen and (min-width: 1800px) {
   :not(.environment *) > .environment-proof::before,
   :not(.environment *) > .environment-remark::before,
   :not(.environment *) > .environment-example::before,
+  :not(.environment *) > .environment-recall::before,
   :not(.environment *) > .environment-exercise::before {
     position: absolute;
     left: -5%;
@@ -826,7 +861,8 @@ body {
   }
 }
 
-.environment-exercise {
+.environment-exercise,
+.environment-recall {
   --line-color: var(--subtext-color);
   padding-left: 1.5rem;
   position: relative;
@@ -852,7 +888,8 @@ body {
 }
 
 @media print {
-  .environment-exercise {
+  .environment-exercise,
+  .environment-recall {
     -webkit-print-color-adjust: exact !important;
     color-adjust: exact !important;
     --line-color: var(--text-color);
