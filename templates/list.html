@@ -35,10 +35,10 @@
     {% for child in children %}
     <a class="list-item" href="{{ http_root }}{{ child.path }}"
       {% if child.description %}
-        data-chapter-description="{{ child.description }}"
+        data-description="{{ child.description }}"
       {% endif %}
       {% if child.keywords %}
-        data-chapter-keywords="{{ child.keywords | join(" ") }}"
+        data-keywords="{{ child.keywords | join(" ") }}"
       {% endif %}>
 
       {% if child.cover %}
@@ -58,5 +58,5 @@
     {% endfor %}
   </div>
 
-  <script src="{{ http_root }}static/subject_search.js"></script>
+  <script src="{{ http_root }}js/list_search.js"></script>
 </body>
