@@ -1,8 +1,5 @@
 - group shared functions in renderers
 - clean structure
-- environments
-  - recall
-  - dimmed
 - tables
 - allow pdf files, images, code…
 - conceal level for mde (only thm, def, cor, lemma…)

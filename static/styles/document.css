@@ -719,6 +719,8 @@ ul.list-plus li {
 .environment-exercise > .environment-title,
 .environment-recall > .environment-title {
   font-style: italic;
+  font-weight: bold;
+  color: var(--subtext-color);
   display: inline-block;
   &::before {
     content: "(";
@@ -726,8 +728,11 @@ ul.list-plus li {
   &::after {
     content: ")";
   }
-  &.environment-title {
-    margin-left: 1ex;
+
+  @media screen and (max-width: 1800px) {
+    &.environment-title {
+      margin-left: 1ex;
+    }
   }
 }
 
