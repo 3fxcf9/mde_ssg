@@ -37,6 +37,11 @@ h1 {
   transition: opacity 0.1s ease;
 }
 
+.list-item:hover,
+.list-item:focus-visible {
+  outline: 1px dashed var(--subtext-color);
+}
+
 .list-item:hover .cover {
   opacity: 0.5;
 }
