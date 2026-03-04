@@ -55,7 +55,8 @@ const macros = {
   "\\abs": "\\left\\lvert#1\\right\\rvert",
   "\\norm": "\\left\\lVert#1\\right\\rVert",
   "\\opnorm": "\\left\\lVert#1\\right\\rVert_{\\text{op}}",
-  "\\triplenorm": "|\\hspace{-0.1em}|\\hspace{-0.1em}|#1|\\hspace{-0.1em}|\\hspace{-0.1em}|",
+  "\\triplenorm":
+    "|\\hspace{-0.1em}|\\hspace{-0.1em}|#1|\\hspace{-0.1em}|\\hspace{-0.1em}|",
   "\\floor": "\\left\\lfloor#1\\right\\rfloor",
   "\\ceil": "\\left\\lceil#1\\right\\rceil",
   "\\card": "\\#",
@@ -90,13 +91,16 @@ const macros = {
   "\\sinc": "\\operatorname{sinc}",
   "\\mtx": "\\begin{pmatrix}#1\\end{pmatrix}",
   "\\vmtx": "\\begin{vmatrix}#1\\end{vmatrix}",
-  "\\arrmtx": "\\left(\\def\\arraystretch{1.5}\\begin{array}{#1}#2\\end{array}\\right)",
-  "\\arrvmtx": "\\left|\\def\\arraystretch{1.5}\\begin{array}{#1}#2\\end{array}\\right|",
+  "\\arrmtx":
+    "\\left(\\def\\arraystretch{1.5}\\begin{array}{#1}#2\\end{array}\\right)",
+  "\\arrvmtx":
+    "\\left|\\def\\arraystretch{1.5}\\begin{array}{#1}#2\\end{array}\\right|",
   "\\arr": "\\def\\arraystretch{1.5}\\begin{array}{#1}#2\\end{array}",
   "\\transp": "^{\\mkern-1.5mu\\mathsf{T}}",
   "\\can": "\\text{can}",
   "\\tilde": "\\widetilde",
-  "\\applic": "\\begin{array}{rcl}#1 & \\longrightarrow & #2 \\\\ #3 & \\longmapsto & #4\\end{array}",
+  "\\applic":
+    "\\begin{array}{rcl}#1 & \\longrightarrow & #2 \\\\ #3 & \\longmapsto & #4\\end{array}",
   // "\\scalar": "\\left\\langle #1 \\middle\\vert #2 \\right\\rangle",
   "\\scalar": "\\left\\langle #1 , #2 \\right\\rangle",
   "\\oplusortho": "\\overset{\\ortho}{\\oplus}",
@@ -138,14 +142,14 @@ const macros = {
   "\\diag": "\\operatorname{diag}",
   "\\long": "\\operatorname{long}",
   "\\sembl": "\\overset{\\tiny S}\\sim",
-  "\\mangl":"\\angl{\\scriptsize $#1$\\,}",
-  "\\sur":"\\text{ sur }",
-  "\\dans":"\\text{ sur }",
-  "\\if":"&\\text{si }",
-  "\\and":"\\text{ et }",
-  "\\ie":"\\text{ i.e. }",
-  "\\with":"\\quad\\text{with}\\quad",
-  "\\else":"&\\text{sinon}",
+  "\\mangl": "\\angl{\\scriptsize $#1$\\,}",
+  "\\sur": "\\text{ sur }",
+  "\\dans": "\\text{ sur }",
+  "\\if": "&\\text{si }",
+  "\\and": "\\text{ et }",
+  "\\ie": "\\text{ i.e. }",
+  "\\with": "\\quad\\text{with}\\quad",
+  "\\else": "&\\text{sinon}",
   "\\ring": "\\mathring",
   "\\fr": "\\operatorname{fr}",
   "\\longring": "\\mathring{\\overgroup{#1}}",
@@ -155,10 +159,14 @@ const macros = {
   // "\\downbigcup": "\\bigcup\\mathclap{\\raisebox{0.2ex}{\\mkern{-3.4ex}$\\downarrow$}}",
   // "\\upbigcap": "\\bigcap\\mathclap{\\raisebox{-0.2ex}{\\mkern{-3.4ex}$\\uparrow$}}",
   // "\\downbigcap": "\\bigcap\\mathclap{\\raisebox{-0.2ex}{\\mkern{-3.4ex}$\\downarrow$}}"
-  "\\upbigcup": "\\bigcup\\mathclap{\\raisebox{0.8ex}{\\mkern{-1.22ex}$\\boldsymbol\\uparrow$}}",
-  "\\downbigcup": "\\bigcup\\mathclap{\\raisebox{0.2ex}{\\mkern{-3.4ex}$\\downarrow$}}",
-  "\\upbigcap": "\\bigcap\\mathclap{\\raisebox{-0.2ex}{\\mkern{-3.4ex}$\\uparrow$}}",
-  "\\downbigcap": "\\bigcap\\mathclap{\\raisebox{-0.8ex}{\\mkern{-1.24ex}$\\boldsymbol\\downarrow$}}",
+  "\\upbigcup":
+    "\\bigcup\\mathclap{\\raisebox{0.8ex}{\\mkern{-1.22ex}$\\boldsymbol\\uparrow$}}",
+  "\\downbigcup":
+    "\\bigcup\\mathclap{\\raisebox{0.2ex}{\\mkern{-3.4ex}$\\downarrow$}}",
+  "\\upbigcap":
+    "\\bigcap\\mathclap{\\raisebox{-0.2ex}{\\mkern{-3.4ex}$\\uparrow$}}",
+  "\\downbigcap":
+    "\\bigcap\\mathclap{\\raisebox{-0.8ex}{\\mkern{-1.24ex}$\\boldsymbol\\downarrow$}}",
 };
 
 // document.addEventListener("DOMContentLoaded", function () {});
@@ -225,7 +233,9 @@ function renderMath() {
       }
     });
   });
+  console.log("OK");
+  const event = new CustomEvent("katexFinished");
+  document.dispatchEvent(event);
 }
-
 
 window.addEventListener("load", renderMath);
