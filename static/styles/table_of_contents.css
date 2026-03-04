@@ -31,11 +31,11 @@
   font-size: 0.8rem;
 }
 
-.toc>li {
+.toc > li {
   margin-bottom: 0.5rem;
 }
 
-.toc>li>ol {
+.toc > li > ol {
   /* list-style-type: custom-alpha; */
   list-style: upper-alpha;
 }

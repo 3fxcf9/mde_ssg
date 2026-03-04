@@ -3,13 +3,26 @@ body {
   --bg-greyed: #45475a23;
   --text-color: #cdd6f4;
   --subtext-color: #45475a;
-  --red-color: #f38ba8;
+  --red-color: #ffa3a3;
   --accent-color: #89b4fa;
-  --on-accent-color: black;
+  --on-accent-color: var(--bg-color);
   --links-color: #89b4fa;
   --code-bg-color: #ffffff0a;
   --code-color: #666;
   --input-background-color: #1e1f2c;
+}
+
+body.theme-latte {
+  --bg-color: #dce0e8;
+  --bg-greyed: #45475a23;
+  --text-color: #181926;
+  --subtext-color: #7c7f93;
+  --red-color: #e64553;
+  --accent-color: #04a5e5;
+  --on-accent-color: var(--bg-color);
+  --links-color: #04a5e5;
+  --code-bg-color: #0000000a;
+  --input-background-color: var(--bg-greyed);
 }
 
 @media print {
@@ -29,16 +42,17 @@ body {
 }
 
 @font-face {
-  font-family: 'Inter Variable';
-  src: url('../fonts/inter/InterVariable.ttf') format('truetype-variations');
+  font-family: "Inter Variable";
+  src: url("../fonts/inter/InterVariable.ttf") format("truetype-variations");
   font-weight: 100 900;
   font-display: swap;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Inter Variable';
-  src: url('../fonts/inter/InterVariable-Italic.ttf') format('truetype-variations');
+  font-family: "Inter Variable";
+  src: url("../fonts/inter/InterVariable-Italic.ttf")
+    format("truetype-variations");
   font-weight: 100 900;
   font-display: swap;
   font-style: italic;
@@ -53,7 +67,7 @@ body {
 }
 
 :root {
-  font-family: 'Inter Variable', sans-serif;
+  font-family: "Inter Variable", sans-serif;
   font-feature-settings:
     "liga" 1,
     "calt" 1;
@@ -62,7 +76,7 @@ body {
 
 @supports (font-variation-settings: normal) {
   :root {
-    font-family: 'Inter Variable', sans-serif;
+    font-family: "Inter Variable", sans-serif;
   }
 }
 
@@ -105,7 +119,7 @@ body {
 }
 
 .back-button {
-  font-family: 'Inter Variable', sans-serif;
+  font-family: "Inter Variable", sans-serif;
   font-size: initial;
   text-decoration: none;
   color: inherit;

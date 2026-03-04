@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ http_root }}styles/document.css" />
   <link rel="stylesheet" href="{{ http_root }}styles/table_of_contents.css" />
   <link rel="stylesheet" href="{{ http_root }}styles/figure_zoom.css" />
+  <link rel="stylesheet" href="{{ http_root }}styles/environment_selector.css" />
 
   <link rel="stylesheet" href="{{ http_root }}katex/katex.min.css"/>
   <link href="{{ http_root }}fonts/computer-modern/fonts/serif.css" rel="stylesheet">
@@ -46,12 +47,13 @@
 
   <main class="right">{{ html | safe }}</main>
 
+  <script src="{{ http_root }}js/color_theme.js"></script>
   <script defer src="{{ http_root }}katex/katex.min.js"></script>
   <script src="{{ http_root }}js/math_rendering.js"></script>
-
   <script src="{{ http_root }}js/table_of_contents.js"></script>
-
   <script src="{{ http_root }}js/figure_zoom.js"></script>
+  <script src="{{ http_root }}js/environment_selector.js"></script>
+
 
   <script>
     const menuElement = document.querySelector(".left");
@@ -91,5 +93,4 @@
     });
   </script>
 </body>
-
 </html>
