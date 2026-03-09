@@ -40,10 +40,10 @@
       {% endif %}
       <div class="content">
         <div>
-          <span class="tile-title">{{ child.title }}</span>
-          <span class="tile-right">{{ child.date }}</span>
+          <span class="tile-title">{{ child.title | safe }}</span>
+          <span class="tile-right">{{ child.date | safe }}</span>
         </div>
-        <span class="tile-subtitle">{{ child.subtitle }}</span>
+        <span class="tile-subtitle">{{ child.subtitle | safe }}</span>
       </div>
     </a>
     {% endfor %}

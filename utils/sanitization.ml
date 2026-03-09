@@ -8,7 +8,7 @@ let sanitize_path (s : string) : string =
       match c with
       | 'a' .. 'z' | '0' .. '9' -> Buffer.add_char buf c
       | ' ' | '-' | '_' -> Buffer.add_char buf '-'
-      | '/' -> Buffer.add_char buf '/'
+      (* | '/' -> Buffer.add_char buf '/' *)
       | _ -> ())
     s;
   (* Collapse multiple '-' *)

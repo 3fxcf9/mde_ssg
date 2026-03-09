@@ -45,14 +45,14 @@
       <div class="cover" style="background-image: url('{{ http_root }}{{ child.cover }}')"></div>
       {% endif %}
 
-      <span class="list-item-title">{{ child.title }}</span>
+      <span class="list-item-title">{{ child.title | safe }}</span>
 
       {% if child.keywords %}
       <span class="list-item-keywords">{{ child.keywords | join(" ") }}</span>
       {% endif %}
 
       {% if child.date %}
-      <span class="list-item-date">{{ child.date }}</span>
+      <span class="list-item-date">{{ child.date | safe }}</span>
       {% endif %}
     </a>
     {% endfor %}

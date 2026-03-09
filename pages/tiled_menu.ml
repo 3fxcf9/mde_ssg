@@ -20,8 +20,8 @@ let list_children render_page path output_root http_root output_path prev_title
                Debug.log "Detected children %s" dir;
                (* Render children *)
                render_page dir output_root http_root
-                 (Sanitization.sanitize_path
-                 @@ Filename.concat output_path title)
+                 (Filename.concat output_path
+                    (Sanitization.sanitize_path title))
                  prev_title;
                Some infos
            | Error (_, message) ->
