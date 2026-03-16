@@ -1,5 +1,5 @@
 - group shared functions in renderers
 - clean structure
-- tables
 - allow pdf files, images, code…
 - conceal level for mde (only thm, def, cor, lemma…)
+- local katex macros (for all children)

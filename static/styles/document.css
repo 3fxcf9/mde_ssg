@@ -1017,6 +1017,21 @@ body {
     clear: left;
   }
 
+  /*************** Table **************/
+  table {
+    border-collapse: collapse;
+  }
+
+  th {
+    background: var(--bg-greyed);
+  }
+
+  td,
+  th {
+    border: 1px solid var(--subtext-color);
+    padding: 0.3em 0.8em;
+  }
+
   /*************** Figure **************/
   body {
     counter-reset: figure-counter;
