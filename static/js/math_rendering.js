@@ -91,6 +91,7 @@ const macros = {
   "\\com": "\\operatorname{com}",
   "\\sinc": "\\operatorname{sinc}",
   "\\mtx": "\\begin{pmatrix}#1\\end{pmatrix}",
+  "\\emtx": "\\begin{matrix}#1\\end{matrix}",
   "\\vmtx": "\\begin{vmatrix}#1\\end{vmatrix}",
   "\\arrmtx":
     "\\left(\\def\\arraystretch{1.5}\\begin{array}{#1}#2\\end{array}\\right)",
@@ -100,6 +101,7 @@ const macros = {
   "\\transp": "^{\\mkern-1.5mu\\mathsf{T}}",
   "\\can": "\\text{can}",
   "\\tilde": "\\widetilde",
+  "\\ang": "\\widehat",
   "\\applic":
     "\\begin{array}{rcl}#1 & \\longrightarrow & #2 \\\\ #3 & \\longmapsto & #4\\end{array}",
   // "\\scalar": "\\left\\langle #1 \\middle\\vert #2 \\right\\rangle",
